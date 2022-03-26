@@ -20,22 +20,11 @@ function LoginForm() {
             // console.log(res.data);
             if (res.data === "user exist") {
                 setError(true)
-            }
+            }     
         })
 
         if (!error) {
-            axios.post('https://mgl-be.herokuapp.com/loadUser');
-
-            // console.log(details)
-            axios.post('https://mgl-be.herokuapp.com/login', details)
-            .then(res => {
-                // console.log(res.data)
-                setError(false);
-                dispatch(ADD_USER({token: res.data}));
-                navigate("/");
-            })
-            .catch(err => { setError(true) })
-            // Login(details);
+            navigate("/login");
         }
     }
 
