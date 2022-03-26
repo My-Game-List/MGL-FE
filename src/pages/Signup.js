@@ -17,15 +17,11 @@ function LoginForm() {
 
         axios.post('https://mgl-be.herokuapp.com/signup', details)
         .then(res => {
-            // console.log(res.data);
-            if (res.data === "user exist") {
-                setError(true)
-            }     
-        })
-
-        if (!error) {
+            axios.post('https://mgl-be.herokuapp.com/loadUser');
+            
             navigate("/login");
-        }
+        })
+        .catch(err => setError(true));
     }
 
     return (
@@ -63,19 +59,19 @@ function LoginForm() {
                             <div className="col-8">
                             <div className="row">
                                     <div className="form-group">
-                                        <input type='username' name='username' id='username' onChange={e => setDetails({...details, username: e.target.value})} value={details.username} />
+                                        <input type='username' name='username' id='username' required onChange={e => setDetails({...details, username: e.target.value})} value={details.username} />
                                     </div>
                                 </div>
                                 {/* <br></br> */}
                                 <div className="row">
                                     <div className="form-group">
-                                        <input type='email' name='email' id='email' onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
+                                        <input type='email' name='email' id='email' required onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
                                     </div>
                                 </div>
                                 {/* <br></br> */}
                                 <div className="row">
                                     <div className="form-group">
-                                        <input type='password' name='password' id='password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
+                                        <input type='password' name='password' id='password' required onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
                                     </div>
                                 </div>
                                 <br></br>
