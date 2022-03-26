@@ -79,7 +79,7 @@ function Yourlist() {
                         ))) : <p>You Don't Have a Playing Game</p> }
                     </Tab>
                     <Tab eventKey="plan" title="Plan To Play">
-                        {games.playing.length !== 0 ? (
+                        {games.plan.length !== 0 ? (
                         games.plan.map((g, id) => 
                             (<a href={`../OneGame/${g.id}`} key={id} id='searchGame'>
                             <div key={id} className='row' id='searchOne'>
