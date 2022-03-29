@@ -14,7 +14,7 @@ function UserEditImg(props) {
 
     useEffect(() => {
         if (token === "") {
-            navigate('/home');
+            navigate('/');
         }
     })
 
