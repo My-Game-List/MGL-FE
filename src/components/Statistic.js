@@ -8,7 +8,7 @@ function Statistic(props) {
     const [username, setUsername] = useState('');
     
     useEffect(() => {
-        axios.post("https://mgl-be.herokuapp.com/getUserGames", { email: user.email })
+        axios.post("https://mgl-be.herokuapp.com/getUserByEmail", { email: user.email })
         .then(res => {
             setGame(res.data.games);
             setUsername(res.data.username);

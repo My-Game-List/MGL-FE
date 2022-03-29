@@ -10,6 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './redux/store';
 import Yourlist from './pages/Yourlist';
 import Signup from './pages/Signup';
+import EditProfile from './pages/EditProfile';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -29,7 +31,13 @@ function App() {
             <Route path="/OneGame/:id" element={<OneGame />} />
             <Route path='/yourList/:userid' element={<Yourlist />} />
             <Route path='/signup' element={<Signup />} />
+            <Route path='/EditProfile/:userid' element={<EditProfile />} />
+            <Route path='/profile/:userid' element={<Profile />} />
           </Routes>
+
+          <script src="https://unpkg.com/react/umd/react.production.min.js" crossOrigin="anonymous"></script>
+          <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossOrigin="anonymous"></script>
+          <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossOrigin="anonymous"></script>
         </BrowserRouter>
       </PersistGate>
     </Provider>

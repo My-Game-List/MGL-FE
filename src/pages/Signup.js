@@ -28,14 +28,12 @@ function LoginForm() {
         <React.Fragment>
             <NavBar/>
             <div className="container">
-                <form onSubmit={submitHandler}>
+                <h2>Signup</h2>
+                {error ? (<Alert variant="danger" onClose={() => setError(false)} dismissible >
+                    <p>Email or Username Already Exist..</p>
+                </Alert>) : (<form onSubmit={submitHandler}>
                     <div className="form-inner">
                         <div className="row">
-
-                            <h2>Signup</h2>
-                            {error ? (<Alert variant="danger" onClose={() => setError(false)} dismissible >
-                                <p>Email or Username Already Exist..</p>
-                            </Alert>) : ("")}
                             <div className="col-1">
                                 <div className="row">
                                     <div className="form-group">
@@ -59,19 +57,19 @@ function LoginForm() {
                             <div className="col-8">
                             <div className="row">
                                     <div className="form-group">
-                                        <input type='username' name='username' id='username' required onChange={e => setDetails({...details, username: e.target.value})} value={details.username} />
+                                        <input type='username' name='username' id='username' onChange={e => setDetails({...details, username: e.target.value})} value={details.username} />
                                     </div>
                                 </div>
                                 {/* <br></br> */}
                                 <div className="row">
                                     <div className="form-group">
-                                        <input type='email' name='email' id='email' required onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
+                                        <input type='email' name='email' id='email' onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
                                     </div>
                                 </div>
                                 {/* <br></br> */}
                                 <div className="row">
                                     <div className="form-group">
-                                        <input type='password' name='password' id='password' required onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
+                                        <input type='password' name='password' id='password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
                                     </div>
                                 </div>
                                 <br></br>
@@ -83,7 +81,7 @@ function LoginForm() {
                             </div>
                         </div>
                     </div>
-                </form>
+                </form>)}
             </div>
 
         </React.Fragment>

@@ -11,18 +11,10 @@ import NavBar from '../components/NavBar';
 function Home() {
     const token = useSelector((state) => state.data.datas.token)
     const user = token === "" ? "" : jwt_decode(token);
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     axios.post('http://localhost:5000/getUserGames', { email: user.email} )
-    //     .then(res => {
-    //         dispatch(ADD_USER(res));
-    //     })
-    // }, []);
 
     return (
         <React.Fragment>
-            <NavBar/>
+            <NavBar />
             <div className='container'>
             {user.email !== undefined ? <Statistic user={user}/> : ""} 
             <div className='row'>

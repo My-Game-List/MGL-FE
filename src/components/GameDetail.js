@@ -21,7 +21,7 @@ function GameDetail(props) {
 
                 <div className='col'>
                     <p>Genre : </p>
-                    {genre.join(', ')}
+                    {genre === '---' ? "---" : genre.join(', ')}
                 </div>
             </div>
         </div>

@@ -70,6 +70,23 @@ ul, li {
   padding: 1%;
 }
 
+#myList {
+  text-decoration: none;
+  color: blue;
+}
+
+.profileIMG {
+  object-fit: fill;
+  height: 300px;
+  width: 300px;
+}
+
+.profileIMGSmaller {
+  object-fit: fill;
+  height: 85px;
+  width: 85px;
+}
+
 #searchOne {
   padding: 0.5%;
   border: gray solid;

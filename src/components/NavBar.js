@@ -5,20 +5,23 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { REMOVE_USER } from '../redux/sliceData';
 import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
+import base from '../asset/rickroll-roll.gif';
 
 function NavBar() {
+    const navigate = useNavigate();
 
     // console.log(useSelector((state) => state.data.datas.token))
     const dispatch = useDispatch();
     const token = useSelector((state) => state.data.datas.token)
     const user = token === "" ? "" : jwt_decode(token);
     const [search, setSearch] = useState('');
-    const [userid, setUserid] = useState('');
+    const [User, setUser] = useState('');
 
     useEffect(() => {
-        axios.post("https://mgl-be.herokuapp.com/getUserGames", { email: user.email })
+        axios.post("https://mgl-be.herokuapp.com/getUserByEmail", { email: user.email })
         .then(res => {
-            setUserid(res.data.id)
+            setUser(res.data)
         })
     }, [])
 
@@ -26,7 +29,7 @@ function NavBar() {
     function handlerSubmit(event) {
         event.preventDefault();
         // console.log(search);
-        window.location.href = `/search/${search.search}`;
+        window.location.href = (`/search/${search.search}`);
     }
 
     function handlerChange(event) {
@@ -52,10 +55,10 @@ function NavBar() {
                 >
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="#action2">Top Games</Nav.Link>
-                    <Nav.Link href={user.email !== undefined ? (`/yourList/${userid}`) : ("/login")}>{user.email !== undefined ? ("Your List") : ("Login")}</Nav.Link>
+                    <Nav.Link href={user.email !== undefined ? (`/yourList/${User.id}`) : ("/login")}>{user.email !== undefined ? ("Your List") : ("Login")}</Nav.Link>
                     <NavDropdown title="Other" id="navbarScrollingDropdown">
-                    <NavDropdown.Item href="#action3">Profile</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">Friends</NavDropdown.Item>
+                    <NavDropdown.Item href={`/profile/${User.id}`} disabled={user.email === undefined}>Profile</NavDropdown.Item>
+                    <NavDropdown.Item href="#action4" disabled={user.email === undefined}>Friends</NavDropdown.Item>
                     <NavDropdown.Divider />
                     {user.email !== undefined ? (
                         <NavDropdown.Item className="text-danger" onClick={logOutHander}>
@@ -69,6 +72,12 @@ function NavBar() {
                     Link
                     </Nav.Link>
                 </Nav>
+                <Nav>
+                    <Nav.Link href={`/profile/${User.id}`}>
+                        <img width="27" height="27" className='rounded-circle' src={User.imgURL === "" || User.imgURL === undefined ? base : User.imgURL}></img>
+                        {" " + User.username}
+                    </Nav.Link>
+                </Nav>
                 <Form className="d-flex" onSubmit={handlerSubmit}>
                     <FormControl
                         type="search"
@@ -77,7 +86,6 @@ function NavBar() {
                         aria-label="Search"
                         onChange={handlerChange}
                     />
-                    {/* profile here */}
                     <Button id='button' variant="outline-success -warning" type='Submit'>Search</Button>
                 </Form>
                 </Navbar.Collapse>

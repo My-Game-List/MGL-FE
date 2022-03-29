@@ -1,0 +1,116 @@
+import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+
+function OneGame(props) {
+    const [isLoading, setIsLoading] = useState(true);
+    const [status, setStatus] = useState('-- Add Game --');
+    const [rating, setRating] = useState('-- Add Score --');
+
+    const rate = ['-- Add Score --','1','2','3','4','5','6','7','8','9','10'];
+
+    useEffect(() => {
+        // console.log(props)
+        axios.post('https://mgl-be.herokuapp.com/getUserByEmail', { email: props.user.email })
+        .then(res => {
+            // console.log(res.data);
+            if (res.data !== "") {
+                const games = res.data.games;
+            
+                games.completed.map((g) => {
+                    if (g.id == props.id) { setStatus('Completed'); setRating(g.rate); }
+                })
+
+                games.playing.map((g) => {
+                    if (g.id == props.id) { setStatus('Playing'); setRating(g.rate); }
+                })
+
+                games.plan.map((g) => {
+                    if (g.id == props.id) { setStatus('Plan to Play'); setRating(g.rate); }
+                })
+            }
+
+            setIsLoading(false);
+        })
+    }, []);
+
+    function ratingChangeHandler(e) {
+        setRating(e);
+
+        axios.post('https://mgl-be.herokuapp.com/setGameRating', { email: props.user.email, value: e, id: props.id })
+    }
+
+    function statusChangeHandler(e) {
+        let confirmed = true;
+        if (rating !== '-- Add Score --' && e === "-- Add Game --") {
+            confirmed = window.confirm("If you remove this game, your rating will be remove too. continue?")
+            if (confirmed) {
+                setRating(e);
+            } else {
+                return;
+            }
+        }
+        setStatus(e);
+        axios.post('https://mgl-be.herokuapp.com/setGameStatus', { email: props.user.email, value: e, id: props.id })
+    }
+
+    return (
+        isLoading ? (
+            <div className='container'>
+                Loading...
+            </div>
+        ) : (
+            <React.Fragment>
+                <label htmlFor="status">
+                Status
+                <br></br>
+                {props.user === "" ? (
+                <select disabled value={status} onChange={(e) => statusChangeHandler(e.target.value)}>
+                {
+                ['-- Add Game --','Completed', 'Playing', 'Plan to Play'].map((a, id) => (
+                    <option key={id} value={a}>{a}</option>
+                ))
+                }
+                </select>
+                ) : (
+                <select value={status} onChange={(e) => statusChangeHandler(e.target.value)}>
+                    {
+                    ['-- Add Game --','Completed', 'Playing', 'Plan to Play'].map((a, id) => (
+                        <option key={id} value={a}>{a}</option>
+                    ))
+                    }
+                </select>)
+                }
+                </label>
+                
+                <label htmlFor="rate">
+                Your Rating
+                <br></br>
+                {props.user === "" || status === "-- Add Game --" ? (
+                <select disabled value={rating} onChange={(e) => ratingChangeHandler(e.target.value)}>
+                {
+                rate.map((a, id) => (
+                    <option key={id} value={a}>{a}</option>
+                ))
+                }
+                </select>
+                ) : (
+                <select value={rating} onChange={(e) => ratingChangeHandler(e.target.value)}>
+                    {
+                    rate.map((a, id) => (
+                        <option key={id} value={a}>{a}</option>
+                    ))
+                    }
+                </select>)
+                }
+                
+                {props.user === "" ? (<p>Sign in To Mark This Game</p>) : ("")}
+
+                </label> 
+            </React.Fragment>
+        )
+    )
+}
+
+export default OneGame;

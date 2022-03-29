@@ -10,12 +10,16 @@ function GameStats(props) {
     const [platform, setPlatform] = useState([]);
 
     useEffect(() => {
-        // console.log(id);
-        axios.get(`https://mgl-be.herokuapp.com/release/${props.game.id}`)
-        .then((res) => {
-            setRelease(res.data);
-            // console.log(res.data);
-        })
+        // console.log(props.game.id);
+        try {
+            axios.get(`https://mgl-be.herokuapp.com/release/${props.game.id}`)
+            .then((res) => {
+                setRelease(res.data);
+                // console.log(res.data);
+            })
+        } catch {
+            setRelease("---");
+        }
 
         try {
             axios.get(`https://mgl-be.herokuapp.com/company/${props.game.involved_companies[0]}`)
@@ -80,7 +84,7 @@ function GameStats(props) {
                     </div>
                     <div className="col-6">
                         <h5 align='center'>Users Rate</h5>
-                        <p align='center'> {props.game.total_rating_count} Users </p>
+                        <p align='center'> {props.game.total_rating_count === undefined ? "---" : props.game.total_rating_count} Users </p>
                     </div>
                 </div>
             </div>

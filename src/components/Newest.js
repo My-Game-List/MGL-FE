@@ -13,7 +13,7 @@ class TopConsole extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/newest')
+        axios.get('https://mgl-be.herokuapp.com/newest')
         .then(res => {
             this.setState({ game: res.data });
             this.setState({ isLoading: false });
