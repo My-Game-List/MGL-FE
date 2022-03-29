@@ -14,14 +14,14 @@ function ProfileMenu(props) {
         props.user.followings.map(u => {
             axios.post('https://mgl-be.herokuapp.com/getUserById', { id: u })
             .then(res => {
-                setFollowings(followings.concat(res.data));
+                setFollowings(followings => [...followings, res.data]);
             })
         })
 
         props.user.followers.map(u => {
             axios.post('https://mgl-be.herokuapp.com/getUserById', { id: u })
             .then(res => {
-                setFollowers(followers.concat(res.data));
+                setFollowers(followers => [...followers, res.data]);
             })
         })
     }, [])
