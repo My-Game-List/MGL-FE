@@ -73,10 +73,10 @@ function NavBar() {
                     </Nav.Link>
                 </Nav>
                 <Nav>
-                    <Nav.Link href={`/profile/${User.id}`}>
+                    {User.id !== undefined ? (<Nav.Link href={`/profile/${User.id}`}>
                         <img width="27" height="27" className='rounded-circle' src={User.imgURL === "" || User.imgURL === undefined ? base : User.imgURL}></img>
                         {" " + User.username}
-                    </Nav.Link>
+                    </Nav.Link>) : ""}
                 </Nav>
                 <Form className="d-flex" onSubmit={handlerSubmit}>
                     <FormControl
