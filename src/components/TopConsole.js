@@ -36,7 +36,7 @@ class TopConsole extends Component {
                                 <a href={`/OneGame/${item.id}`}>
                                     <div className='oneGame'>
                                         <div>
-                                            <img className='gameImg' alt={item.name} src={item.imageURL} />
+                                            <img className='gameImg' alt={item.name} src={item.cover.url} />
                                         </div>
 
                                         <div className='gameTitle'>

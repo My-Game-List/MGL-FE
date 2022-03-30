@@ -5,10 +5,10 @@ function ImageAndTitle(props) {
 
     return (
         <div className='container' id='contain2' align='center'>
-            {props.game.imageURL === undefined ? (<h3>:( This Game Containt No Image</h3>) 
+            {props.game.cover === undefined ? (<h3>:( This Game Containt No Image</h3>) 
             : (
                 <div className='row'>
-                <img id='gameImg' alt='me' src={props.game.imageURL}/>
+                <img id='gameImg' alt='me' src={props.game.cover}/>
                 </div>
             )}
             <div>

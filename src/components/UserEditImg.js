@@ -9,6 +9,8 @@ function UserEditImg(props) {
     const navigate = useNavigate();
     const [file, setFile] = useState();
 
+    const [load, setLoad] = useState(false);
+
     let token = useSelector((state) => state.data.datas.token);
     let user = token === "" ? "" : jwt_decode(token);
 
@@ -41,6 +43,8 @@ function UserEditImg(props) {
         formData.append('file', file);
         formData.append('email', user.email);
         
+        setLoad(true);
+
         axios.post("https://mgl-be.herokuapp.com/updateUser", formData)
         .then(res => {
             window.location.reload();
@@ -48,12 +52,19 @@ function UserEditImg(props) {
     }
 
     return (
-        <div className='row'>
-            <div className='col'>
-                <input type="file" accept="image/png, image/gif, image/jpeg" onChange={changeHandler} />
-                <Button className="btn btn-success" type='submit' onClick={submitHandler}>Save</Button>
+        <React.Fragment>
+            <div className='row'>
+                <div className='col'>
+                    <input type="file" accept="image/png, image/gif, image/jpeg" onChange={changeHandler} />
+                    <Button className="btn btn-success" type='submit' onClick={submitHandler}>Save</Button>
+                </div>
             </div>
-        </div>
+            <div className='row'>
+                <div className='col'>
+                    {load ? (<p>Uploading! Please Wait...</p>) : ""}
+                </div>
+            </div>
+        </React.Fragment>
     );
     
 }

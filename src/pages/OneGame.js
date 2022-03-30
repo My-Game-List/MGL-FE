@@ -31,9 +31,12 @@ function OneGame() {
 
     return (
         isLoading ? (
-            <div className='container'>
-                Loading...
-            </div>
+            <React.Fragment>
+                <NavBar/>
+                <div className='container'>
+                    Loading...
+                </div>
+            </React.Fragment>
         ) : (
             <React.Fragment>
                 <NavBar/>

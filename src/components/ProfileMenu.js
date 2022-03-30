@@ -118,8 +118,8 @@ function ProfileMenu(props) {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    ))) : <p>This Account Not Following Anyone</p>
+                        </a>)
+                    )) : <p>This Account Not Following Anyone</p>
                 }
             </Tab>
             <Tab eventKey="follower" title="Followers">

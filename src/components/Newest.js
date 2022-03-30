@@ -3,7 +3,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import star from '../asset/Star.png';
 
-class TopConsole extends Component {
+class Newest extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,7 +28,7 @@ class TopConsole extends Component {
                 </div>
             ) : (
                 <React.Fragment>
-                    <h2>Top All Time Games</h2>
+                    <h2>Newest Games</h2>
                     <ul>
                         <div className='contain'>
                         {this.state.game.map((item, index) => (
@@ -36,11 +36,12 @@ class TopConsole extends Component {
                                 <a href={`/OneGame/${item.id}`}>
                                     <div className='oneGame'>
                                         <div>
-                                            <img className='gameImg' alt={item.name} src={item.imageURL} />
+                                            <img className='gameImg' alt={item.name} src={item.cover.url} />
                                         </div>
 
                                         <div className='gameTitle'>
                                             {item.name}<br></br>
+                                            <img src={star}></img>{item.total_rating === undefined ? "--" : item.total_rating.toFixed(2)}
                                         </div>
                                     </div>
                                 </a>
@@ -54,4 +55,4 @@ class TopConsole extends Component {
     }
 }
 
-export default TopConsole;
+export default Newest;
