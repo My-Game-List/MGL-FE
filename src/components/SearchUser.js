@@ -35,7 +35,6 @@ function SearchUser(props) {
                                 <p style={{paddingLeft:'80%', paddingTop: '40%'}}>{id+1}.</p>
                             </div>
                             <div className='col-1'>
-                                {console.log(u)}
                                 {u.imgURL === "" || u.imgURL === undefined ? (
                                     <img src={base} className='profileIMGSmaller rounded-circle'></img>
                                 ) : (

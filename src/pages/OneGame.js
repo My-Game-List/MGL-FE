@@ -11,6 +11,7 @@ import NavBar from '../components/NavBar';
 import { useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import UserStatus from '../components/UserStatus';
+import Screenshot from '../components/Screenshot';
 
 function OneGame() {
     const {id} = useParams();
@@ -60,6 +61,10 @@ function OneGame() {
                             </div>
                             <div className='row'>
                                 <GameDesc game={game} />
+                            </div>
+                            <br/>
+                            <div className='row'>
+                                <Screenshot game={game} />
                             </div>
                         </div>
                         <div className='col-4'>
