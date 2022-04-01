@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-import axios from "axios";
 import star from "../asset/Star.png";
 
 function GameStats(props) {
