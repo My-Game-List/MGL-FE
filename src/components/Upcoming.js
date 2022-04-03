@@ -31,7 +31,7 @@ function TopConsole() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://mgl-be.herokuapp.com/TopAllTime')
+        axios.get('https://mgl-be.herokuapp.com/upcoming')
         .then(res => {
             setGame(res.data);
             setIsLoading(false);
@@ -45,7 +45,7 @@ function TopConsole() {
             </div>
         ) : (
             <React.Fragment>
-                <h2>Top All Time Games</h2>
+                <h2>Top Up Coming Games</h2>
                     <Slider className='contain' {...{dots: true, infinite: true, speed: 500, slidesToShow: 10, slidesToScroll: 10, nextArrow: <NextArrow />, prevArrow: <PrevArrow />}}>
                         {game.map((item, index) => (
                             <center>
