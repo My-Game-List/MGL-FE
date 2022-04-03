@@ -57,7 +57,7 @@ function TopConsole() {
 
                                         <div className='gameTitle'>
                                             {item.name}<br></br>
-                                            <img src={star}></img>{item.total_rating.toFixed(2)}
+                                            <img src={star}></img>{item.total_rating !== undefined ? item.total_rating.toFixed(2) : "--"}
                                         </div>
                                     </div>
                                 </a>
