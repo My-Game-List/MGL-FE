@@ -94,7 +94,7 @@ function ProfileMenu(props) {
                         </div>
                     </div>
                     </a>
-                ))) : <p>This Account Don't Have a Completed Game</p>
+                ))) : ""
                 }
             </Tab>
             <Tab eventKey="followings" title="Followings">
