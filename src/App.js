@@ -12,8 +12,6 @@ import Yourlist from './pages/Yourlist';
 import Signup from './pages/Signup';
 import EditProfile from './pages/EditProfile';
 import Profile from './pages/Profile';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
@@ -26,17 +24,7 @@ function App() {
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossOrigin="anonymous"
           />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            charset="UTF-8"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
+
           <Routes>
             <Route path='/login' exact element={<LoginForm />} />
             <Route path="/" element={<Home />} />

@@ -13,7 +13,7 @@ function Yourlist() {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        axios.post("https://mgl-be.herokuapp.com/getGamesById", { id: userid })
+        axios.post("http://localhost:5000/getGamesById", { id: userid })
         .then((res) => {
             // console.log(res.data)
             if (res.data === "no user") {
@@ -29,15 +29,15 @@ function Yourlist() {
         isLoading ? (
             <React.Fragment>
                 <NavBar/>
-                <div className='container'>
+                <div className=''>
                     Loading...
                 </div>
             </React.Fragment>
         ) : (
-            <React.Fragment>
+            <div className="bg-gray-800 text-white">
                 <NavBar/>
                 <GameList games={games} />
-            </React.Fragment>
+            </div>
         )
     );
 }

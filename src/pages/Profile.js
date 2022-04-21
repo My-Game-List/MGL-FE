@@ -23,7 +23,8 @@ function Profile() {
     const [friend, setFriend] = useState(false);
 
     useEffect( () => {
-        axios.post('https://mgl-be.herokuapp.com/getUserById', {id : userid})
+        setLoading(true);
+        axios.post('http://localhost:5000/getUserById', {id : userid})
         .then( res => {
             // console.log(res.data)
             if (res.data === "") {
@@ -33,7 +34,7 @@ function Profile() {
             setUser(res.data);
         })
 
-        axios.post("https://mgl-be.herokuapp.com/getUserByEmail", { email: userToken.email })
+        axios.post("http://localhost:5000/getUserByEmail", { email: userToken.email })
         .then(res => {
             setId(res.data.id);
 
@@ -42,59 +43,65 @@ function Profile() {
             })
         })
 
-        axios.post("https://mgl-be.herokuapp.com/getGamesById", { id: userid })
+        axios.post("http://localhost:5000/getGamesById", { id: userid })
         .then((res) => {
             // console.log(res.data)
             setGames(res.data);
             setLoading(false);
         })
-    }, [])
+    }, [userid])
 
     function addFriend() {
-        axios.post("https://mgl-be.herokuapp.com/addFriend", { follower: id, following: userid });
+        axios.post("http://localhost:5000/addFriend", { follower: id, following: userid });
         setFriend(true);
     }
 
     function removeFriend() {
-        axios.post("https://mgl-be.herokuapp.com/deleteFriend", { follower: id, following: userid });
+        axios.post("http://localhost:5000/deleteFriend", { follower: id, following: userid });
         setFriend(false);
     }
 
     return (
-        <React.Fragment>
+        <div className="bg-gray-800 text-white'">
             <Navbar />
             {loading ? (
-                <div className='container'>
+                <div className=''>
                     Loading...    
                 </div>
             ) : (
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col-3'>
-                            <UserProfilePict user={user} />
+                <div className='mx-4 grid gap-5 grid-cols-1 grid-rows-1 place-content-center lg:grid-cols-12 bg-gray-800 text-white'>
+                    <div className='col-span-1 lg:col-span-3'>
+                        <UserProfilePict user={user} />
+                        <div className='mx-4 lg:row-start-2'>
                             <Statistic user={user} />
-                            <br></br>
-                            <div className='row'>
-                                <div className='col-5'>
-                                    <Button className='btn btn-primary' href={`/yourList/${userid}`}>Game List</Button>
-                                </div>
-                                <div className='col-1'></div>
-                                <div className='col-5'>
-                                    {user.email === userToken.email && token !== "" ? (
-                                        <Button className='btn btn-warning' href={`/editProfile/${userid}`}>Edit Profile</Button>
-                                    ) : ( friend ? (<Button className='btn btn-danger' onClick={removeFriend}>Remove Friend</Button>) :
-                                        (<Button className='btn btn-success' onClick={addFriend}>Add Friend</Button>))}
-                                </div>
-                            </div>
                         </div>
-                        <div className='col-9'>
-                            <ProfileMenu games={games} user={user} />
+
+                        <div className='lg:row-start-3'>
+                            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-10 mr-4' onClick={()=>navigate(`/yourList/${userid}`)}>Game List</button>
+
+                            {user.email === userToken.email && token !== "" ? (
+                                <button className='bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded' onClick={()=>navigate(`/editProfile/${userid}`)}>Edit Profile</button>
+                            ) : ( 
+                                userToken === "" ? (
+                                    <button className='bg-yellow-400 opacity-60 text-white font-bold py-2 px-4 rounded' disabled>Add Friend</button>
+                                ) : (
+                                    friend ? 
+                                    (
+                                        <button className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded' onClick={removeFriend}>Remove Friend</button>
+                                    ) : (
+                                        <button className='bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded' onClick={addFriend}>Add Friend</button>
+                                    )
+                                )
+                            )}
                         </div>
+                    </div>
+                    <div className='col-span-1 lg:col-span-9 row-span-1 mb-32'>
+                        <ProfileMenu games={games} user={user} />
                     </div>
                 </div>
             )}
             
-        </React.Fragment>
+        </div>
     );
     
 }

@@ -39,13 +39,13 @@ function UserEditImg(props) {
         }
 
         const formData = new FormData();
-        console.log(file);
+        // console.log(file);
         formData.append('file', file);
         formData.append('email', user.email);
         
         setLoad(true);
 
-        axios.post("https://mgl-be.herokuapp.com/updateUser", formData)
+        axios.post("http://localhost:5000/updateUser", formData)
         .then(res => {
             window.location.reload();
         })
@@ -53,16 +53,16 @@ function UserEditImg(props) {
 
     return (
         <React.Fragment>
-            <div className='row'>
-                <div className='col'>
+            <div className='grid grid-cols-1 place-content-center text-center'>
+                <div className='col-span-1'>
                     <input type="file" accept="image/png, image/gif, image/jpeg" onChange={changeHandler} />
+                </div>
+                <div className='col-span-1'>
                     <Button className="btn btn-success" type='submit' onClick={submitHandler}>Save</Button>
                 </div>
             </div>
-            <div className='row'>
-                <div className='col'>
-                    {load ? (<p>Uploading! Please Wait...</p>) : ""}
-                </div>
+            <div className='grid grid-cols-1 place-content-center text-center'>
+                {load ? (<p>Uploading! Please Wait...</p>) : null}
             </div>
         </React.Fragment>
     );

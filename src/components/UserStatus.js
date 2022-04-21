@@ -12,7 +12,7 @@ function OneGame(props) {
 
     useEffect(() => {
         // console.log(props)
-        axios.post('https://mgl-be.herokuapp.com/getUserByEmail', { email: props.user.email })
+        axios.post('http://localhost:5000/getUserByEmail', { email: props.user.email })
         .then(res => {
             // console.log(res.data);
             if (res.data !== "") {
@@ -38,7 +38,7 @@ function OneGame(props) {
     function ratingChangeHandler(e) {
         setRating(e);
 
-        axios.post('https://mgl-be.herokuapp.com/setGameRating', { email: props.user.email, value: e, id: props.id })
+        axios.post('http://localhost:5000/setGameRating', { email: props.user.email, value: e, id: props.id })
     }
 
     function statusChangeHandler(e) {
@@ -52,63 +52,69 @@ function OneGame(props) {
             }
         }
         setStatus(e);
-        axios.post('https://mgl-be.herokuapp.com/setGameStatus', { email: props.user.email, value: e, id: props.id })
+        axios.post('http://localhost:5000/setGameStatus', { email: props.user.email, value: e, id: props.id })
     }
 
     return (
         isLoading ? (
-            <div className='container'>
+            <div className=''>
                 Loading...
             </div>
         ) : (
-            <React.Fragment>
-                <label htmlFor="status">
-                Status
-                <br></br>
-                {props.user === "" ? (
-                <select disabled value={status} onChange={(e) => statusChangeHandler(e.target.value)}>
-                {
-                ['-- Add Game --','Completed', 'Playing', 'Plan to Play'].map((a, id) => (
-                    <option key={id} value={a}>{a}</option>
-                ))
-                }
-                </select>
-                ) : (
-                <select value={status} onChange={(e) => statusChangeHandler(e.target.value)}>
-                    {
-                    ['-- Add Game --','Completed', 'Playing', 'Plan to Play'].map((a, id) => (
-                        <option key={id} value={a}>{a}</option>
-                    ))
-                    }
-                </select>)
-                }
+            <div className='mx-4'>
+                <label htmlFor="status" className='mr-2'>
+                    <div className='bg-cyan-500'>
+                        Status
+                    </div>
+                    <div className='text-black outline m-1 rounded-sm outline-offset-2 outline-blue-500'>
+                        {props.user === "" ? (
+                            <select className='opacity-50' disabled value={status} onChange={(e) => statusChangeHandler(e.target.value)}>
+                                {
+                                ['-- Add Game --','Completed', 'Playing', 'Plan to Play'].map((a, id) => (
+                                    <option key={id} value={a}>{a}</option>
+                                ))
+                                }
+                            </select>
+                        ) : (
+                            <select value={status} onChange={(e) => statusChangeHandler(e.target.value)}>
+                                {
+                                ['-- Add Game --','Completed', 'Playing', 'Plan to Play'].map((a, id) => (
+                                    <option key={id} value={a}>{a}</option>
+                                ))
+                                }
+                            </select>)
+                        }
+                    </div>
                 </label>
                 
-                <label htmlFor="rate">
-                Your Rating
-                <br></br>
-                {props.user === "" || status === "-- Add Game --" ? (
-                <select disabled value={rating} onChange={(e) => ratingChangeHandler(e.target.value)}>
-                {
-                rate.map((a, id) => (
-                    <option key={id} value={a}>{a}</option>
-                ))
-                }
-                </select>
-                ) : (
-                <select value={rating} onChange={(e) => ratingChangeHandler(e.target.value)}>
-                    {
-                    rate.map((a, id) => (
-                        <option key={id} value={a}>{a}</option>
-                    ))
-                    }
-                </select>)
-                }
-                
-                {props.user === "" ? (<p>Sign in To Mark This Game</p>) : ("")}
-
-                </label> 
-            </React.Fragment>
+                <label htmlFor="rate" className=''>
+                    <div className='bg-cyan-500'>
+                        Your Rating
+                    </div>
+                    <div className='text-black outline m-1 rounded-sm outline-offset-2 outline-blue-500'>
+                        {props.user === "" || status === "-- Add Game --" ? (
+                            <select className='opacity-50' disabled value={rating} onChange={(e) => ratingChangeHandler(e.target.value)}>
+                            {
+                            rate.map((a, id) => (
+                                <option key={id} value={a}>{a}</option>
+                            ))
+                            }
+                            </select>
+                        ) : (
+                            <select value={rating} onChange={(e) => ratingChangeHandler(e.target.value)}>
+                                {
+                                rate.map((a, id) => (
+                                    <option key={id} value={a}>{a}</option>
+                                ))
+                                }
+                            </select>)
+                        }
+                    </div>
+                </label>
+                <label className='mx-4 text-red-500'>
+                    {props.user === "" ? (<p>Sign in To Mark This Game</p>) : ("")}
+                </label>
+            </div>
         )
     )
 }

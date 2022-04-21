@@ -15,12 +15,12 @@ function LoginForm() {
     const submitHandler = e => {
         e.preventDefault();
         
-        axios.post('https://mgl-be.herokuapp.com/loadUser');
+        axios.post('http://localhost:5000/loadUser');
 
         // console.log(details)
-        axios.post('https://mgl-be.herokuapp.com/login', details)
+        axios.post('http://localhost:5000/login', details)
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             setError(false);
             dispatch(ADD_USER({token: res.data}));
             navigate("/");
@@ -30,57 +30,46 @@ function LoginForm() {
     }
 
     return (
-        <React.Fragment>
+        <div className="bg-gray-800 text-white">
             <NavBar/>
-            <div className="container">
-                <form onSubmit={submitHandler}>
-                    <div className="form-inner">
-                        <div className="row">
+            <div>
+                <form onSubmit={submitHandler} className="mx-4 grid grid-cols-6 lg:grid-cols-12">
+                    <div className="col-span-6 lg:col-span-12 lg:mx-32">
+                        {error ? (<p className="bg-red-400 hover:bg-red-500 rounded-md p-5" onClick={() => setError(false)} dismissible >
+                            Email or Password Error, Please try again..
+                            Click This box to close
+                        </p>) : null}
+                    </div>
+                    <div className="col-span-6 lg:col-span-12 lg:mx-32">
+                        <h2>Login</h2>
+                    </div>
+                    <div className="col-span-2 lg:col-span-2 lg:mx-32">
+                        <label htmlFor="email">Email: </label>
+                    </div>
+                    <div className="col-span-4 lg:col-span-6 lg:mx-32">
+                        <input className="text-black lg:w-80 outline m-1 outline-offset-2 outline-blue-800" type='email' name='email' id='email' onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
+                    </div>
 
-                            <h2>Login</h2>
-                            {error ? (<Alert variant="danger" onClose={() => setError(false)} dismissible >
-                                <p>Email or Password Error, Please try again..</p>
-                            </Alert>) : ("")}
-                            <div className="col-1">
-                                <div className="row">
-                                    <div className="form-group">
-                                        <label htmlFor="email">Email: </label>
-                                    </div>
-                                </div>
-                                <br></br>
-                                <div className="row">
-                                    <div className="form-group">
-                                        <label htmlFor="password">password: </label>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="col-span-2 lg:col-span-2 lg:row-start-4 lg:mx-32">
+                        <label htmlFor="password">password: </label>
+                    </div>
+                    <div className="col-span-4 lg:col-span-6 lg:mx-32">
+                        <input className="text-black lg:w-80 outline m-1 outline-offset-2 outline-green-800" type='password' name='password' id='password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
+                    </div>
 
-                            <div className="col-8">
-                                <div className="row">
-                                    <div className="form-group">
-                                        <input type='email' name='email' id='email' onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
-                                    </div>
-                                </div>
-                                <br></br>
-                                <div className="row">
-                                    <div className="form-group">
-                                        <input type='password' name='password' id='password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
-                                    </div>
-                                </div>
-                                <br></br>
-                                
-                                <Button type='submit' variant="primary"> Login </Button>
-                                <br></br>
-                                <br></br>
-                                <p>Don't Have an Account?</p>
-                                <Button type='button' variant="warning" href="/signup"> Sign Up </Button>
-                            </div>
-                        </div>
+                    <div className="col-span-6 lg:col-span-12 lg:ml-64">
+                        <button className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-28' type='submit'> Login </button>
+                    </div>
+                    <div className="col-start-3 text-sm col-span-3 mt-4 lg:col-span-12 lg:ml-96 lg:text-lg">
+                        Don't Have an Account?
+                    </div>
+                    <div className="col-span-6 lg:col-span-12 lg:ml-64">
+                        <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded ml-28 mr-4' onClick={()=>navigate('/signup')}> Sign Up </button>
                     </div>
                 </form>
             </div>
 
-        </React.Fragment>
+        </div>
     )
 }
 

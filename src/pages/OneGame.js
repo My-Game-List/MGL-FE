@@ -22,7 +22,7 @@ function OneGame() {
     let user = token === "" ? "" : jwt_decode(token);
 
     useEffect(() => {
-        axios.get(`https://mgl-be.herokuapp.com/game/${id}`)
+        axios.get(`http://localhost:5000/game/${id}`)
         .then((res) => {
             setGame(res.data);
             setIsLoading(false);
@@ -34,51 +34,39 @@ function OneGame() {
         isLoading ? (
             <React.Fragment>
                 <NavBar/>
-                <div className='container'>
+                <div>
                     Loading...
                 </div>
             </React.Fragment>
         ) : (
-            <React.Fragment>
+            <div className='bg-gray-800 text-white'>
                 <NavBar/>
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col-2'>
-                            <div className='row' id='left'>
-                                <ImageAndTitle game={game} />
-                            </div>
-                            <hr></hr>
-                            <div className='row' id='left'>
-                                <GameDetail game={game} />
-                            </div>
+                <div className='mx-4 grid gap-5 grid-cols-1 place-content-center lg:grid-cols-12'>
+                    <div className='col-span-1 lg:col-span-3'>
+                        <ImageAndTitle game={game} />
+                        <hr></hr>
+                        <GameDetail game={game} />
+                    </div>
+
+                    <div className='col-span-1 lg:col-span-6'>
+                        <div>
+                            <GameStats game={game} />
                         </div>
-                        <div className='col-6'>
-                            <div className='row'>
-                                <GameStats game={game} />
-                            </div>
-                            <div className='row'>
-                                <UserStatus id={id} game={game} user={user} />
-                            </div>
-                            <div className='row'>
-                                <GameDesc game={game} />
-                            </div>
-                            <br/>
-                            <div className='row'>
-                                <Screenshot game={game} />
-                            </div>
+                        <div>
+                            <UserStatus id={id} game={game} user={user} />
                         </div>
-                        <div className='col-4'>
-                            <GameTrailer game={game} />
+                        <div>
+                            <GameDesc game={game} />
+                        </div>
+                        <div className='p-4 bg-black'>
+                            <Screenshot game={game} />
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-2'>
-                            
-                        </div>
-                        
+                    <div className='col-span-1 lg:col-span-3'>
+                        <GameTrailer game={game} />
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
         )
     );
     

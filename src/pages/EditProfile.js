@@ -19,7 +19,7 @@ function EditProfile() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.post("https://mgl-be.herokuapp.com/getUserById", { id: userid })
+        axios.post("http://localhost:5000/getUserById", { id: userid })
         .then(res => {
             // console.log(res.data);
             if (res.data.email !== userToken.email) {
@@ -44,31 +44,26 @@ function EditProfile() {
 
     return (
         isLoading ? (
-            <div className='container'>
+            <div className=''>
                 loading...
             </div>
         ) : (
-            <React.Fragment>
+            <div className='bg-gray-800 text-white'>
                 <Navbar />
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col-3'></div>
-                        <div className='col-6'>
-                            <center>
-                                {user.imgURL !== "" ? (
-                                    pict === "" ? (<img src={user.imgURL} className="profileIMG rounded-circle"></img>) :
-                                    (<img src={pict} className="profileIMG rounded-circle"></img>)
-                                ) : (<img src={base}></img>)}
-                                <div className='row'>
-                                    <div className='col'>
-                                        <UserHeader file={changeFile} />
-                                    </div>
-                                </div>
-                            </center>
+                <div className='grid grid-cols-1'>
+                    <div className='col-span-1 mx-14'>
+                        <center>
+                            {user.imgURL !== "" ? (
+                                pict === "" ? (<img alt="" src={user.imgURL} className="h-45 w-45 lg:w-1/2 rounded-full object-scale-down"></img>) :
+                                (<img alt="" src={pict} className="h-45 w-45 rounded-full object-scale-down"></img>)
+                            ) : (<img alt="" src={base} className="h-45 w-45 rounded-full object-scale-down"></img>)}
+                        </center>
+                        <div className='mt-4'>
+                            <UserHeader file={changeFile} />
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
         )
     );
     

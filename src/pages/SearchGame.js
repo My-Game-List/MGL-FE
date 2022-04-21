@@ -10,20 +10,21 @@ function OneGame(props) {
     const {name} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [game, setGame] = useState();
-    const [loadGame, setLoadGame] = useState([]);
+    const [loadGame, setLoadGame] = useState(['a']);
     const [load, setLoad] = useState(10);
 
     useEffect(() => {
         // console.log(id);
 
-        axios.get(`https://mgl-be.herokuapp.com/search/game/${name}`)
+        axios.get(`http://localhost:5000/search/game/${name}`)
         .then((res) => {
             // console.log(res.data);
+            setIsLoading(true);
             setGame(res.data);
             setLoadGame(res.data.slice(0, 10))
             setIsLoading(false);
         })
-    }, []);
+    }, [name]);
 
     function loadMoreGame() {
         // console.log(game.slice(load, load+10))
@@ -36,16 +37,16 @@ function OneGame(props) {
         isLoading ? (
             <React.Fragment>
                 <NavBar/>
-                <div className='container'>
+                <div>
                     Loading...
                 </div>
             </React.Fragment>
         ) : (
-            <React.Fragment>
+            <div className='bg-gray-400 text-white'>
                 <NavBar/>
                 <SearchedGame game={game} loadGame={loadGame} loadMoreGame={loadMoreGame} />
                 <SearchUser name={name} />
-            </React.Fragment>
+            </div>
         )
     );
     
