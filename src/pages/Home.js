@@ -25,32 +25,34 @@ function Home() {
     }, [])
 
     return (
-        isLoading ? (
-            <div>
-                Loading...
-            </div>
-        ) : (
-            <div className='bg-gray-800 text-white'>
-                <NavBar />
-                <div className="mx-4">
-                    <div className='lg:mx-28'>
-                        {user.email !== undefined ? <Statistic user={User}/> : null} 
-                    </div>
-                    <div className='lg:mx-28'>
-                        <TopConsole />
-                    </div>
-                    <div className='lg:mx-28'>
-                        <TopAllTime />
-                    </div>
-                    <div className='lg:mx-28'>
-                        <Newest />
-                    </div>
-                    <div className='lg:mx-28'>
-                        <Upcoming />
+        <div>
+            <NavBar />
+            isLoading ? (
+                <div>
+                    Loading...
+                </div>
+            ) : (
+                <div className='bg-gray-800 text-white'>
+                    <div className="mx-4">
+                        <div className='lg:mx-28'>
+                            {user.email !== undefined ? <Statistic user={User}/> : null} 
+                        </div>
+                        <div className='lg:mx-28'>
+                            <TopConsole />
+                        </div>
+                        <div className='lg:mx-28'>
+                            <TopAllTime />
+                        </div>
+                        <div className='lg:mx-28'>
+                            <Newest />
+                        </div>
+                        <div className='lg:mx-28'>
+                            <Upcoming />
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        </div>
     );
 }
 
