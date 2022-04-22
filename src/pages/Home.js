@@ -26,9 +26,9 @@ function Home() {
 
     return (
         <div>
-            <NavBar />
             isLoading ? (
                 <div>
+                    <NavBar />
                     Loading...
                 </div>
             ) : (
