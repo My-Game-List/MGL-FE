@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import UserHeader from '../components/UserEditImg';
+import UserEditImg from '../components/UserEditImg';
 import Navbar from '../components/NavBar';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -54,12 +54,15 @@ function EditProfile() {
                     <div className='col-span-1 mx-14'>
                         <center>
                             {user.imgURL !== "" ? (
-                                pict === "" ? (<img alt="" src={user.imgURL} className="h-45 w-45 lg:w-1/2 rounded-full object-scale-down"></img>) :
-                                (<img alt="" src={pict} className="h-45 w-45 rounded-full object-scale-down"></img>)
-                            ) : (<img alt="" src={base} className="h-45 w-45 rounded-full object-scale-down"></img>)}
+                                pict === "" ? (
+                                    <img alt="" src={user.imgURL} className="h-44 w-44 lg:w-56 lg:h-56 border rounded-full object-scale-down"></img>
+                                ) : (
+                                    <img alt="" src={pict} className="h-44 w-44 lg:w-56 lg:h-56 rounded-full object-scale-down"></img>
+                                )
+                            ) : (<img alt="" src={base} className="h-44 w-44 lg:w-56 lg:h-56 rounded-full object-scale-down"></img>)}
                         </center>
                         <div className='mt-4'>
-                            <UserHeader file={changeFile} />
+                            <UserEditImg file={changeFile} />
                         </div>
                     </div>
                 </div>

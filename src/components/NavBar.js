@@ -22,7 +22,7 @@ function NavBar() {
         .then(res => {
             setUser(res.data)
         })
-    }, [])
+    }, [User])
 
     // console.log(user)
     function handlerSubmit(event) {
@@ -62,7 +62,7 @@ function NavBar() {
                                     </Link>
                                 ) : (
                                     <Link to={'/login'} style={{textDecoration: 'none'}}>
-                                        Login
+                                        <button className='text-blue-400'>Login</button>
                                     </Link>
                                 )}
                             </li>
@@ -74,7 +74,11 @@ function NavBar() {
                                 <ul className="p-2 bg-green-300">
                                     <Link to={`/profile/${User.id}`} style={{textDecoration: 'none'}}>
                                         <li>
-                                            <a style={{textDecoration: 'none'}} className='hover:bg-primary-focus hover:bg-opacity-40 text-blue-400 font-semibold'>Profile</a>
+                                            {user ? (
+                                                <button style={{textDecoration: 'none'}} className='hover:bg-primary-focus hover:bg-opacity-40 text-blue-400 font-semibold'>Profile</button>
+                                            ) : (
+                                                <button style={{textDecoration: 'none'}} className='hover:bg-primary-focus hover:bg-opacity-40 text-blue-400 opacity-30 font-semibold' disabled>Profile</button>
+                                            )}
                                         </li>
                                     </Link>
                                     <Link to={`#action4`} style={{textDecoration: 'none'}}>
@@ -135,7 +139,11 @@ function NavBar() {
                                 <ul className="p-2 bg-base-content">
                                     <Link to={`/profile/${User.id}`} style={{textDecoration: 'none'}}>
                                         <li>
-                                            <a style={{textDecoration: 'none'}} className='hover:bg-primary-focus hover:bg-opacity-40 font-medium'>Profile</a>
+                                            {user ? (
+                                                <button style={{textDecoration: 'none'}} className='hover:bg-primary-focus hover:bg-opacity-40 text-white font-semibold'>Profile</button>
+                                            ) : (
+                                                <button style={{textDecoration: 'none'}} className='hover:bg-primary-focus hover:bg-opacity-40 text-white-400 opacity-30 font-semibold' disabled>Profile</button>
+                                            )}                                        
                                         </li>
                                     </Link>
                                     <Link to={`#action4`} style={{textDecoration: 'none'}}>
@@ -166,9 +174,9 @@ function NavBar() {
                     <ul className="menu menu-horizontal p-0 my-0 text-md font-semibold">
                         <li>
                             {user && User.imgURL !== "" ? (
-                                <img className='h-12 w-12 object-scale-down m-0 p-0 bg-black rounded-full' alt="me" src={User.imgURL} />
+                                <img className='h-12 w-12 object-scale-down m-0 p-0 bg-white rounded-full' alt="me" src={User.imgURL} />
                             ) : (
-                                <img className='h-12 w-12 object-scale-down m-0 p-0 bg-black rounded-full' alt="me" src={base} />
+                                <img className='h-12 w-12 object-scale-down m-0 p-0 bg-white rounded-full' alt="me" src={base} />
                             )}
                         </li>
                     </ul>

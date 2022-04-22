@@ -1,16 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button } from "react-bootstrap";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { ADD_USER } from "../redux/sliceData";
 import NavBar from "../components/NavBar";
+import jwt_decode from 'jwt-decode';
 
 function LoginForm() {
     const [details, setDetails] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState(false);
+
+    let token = useSelector((state) => state.data.datas.token);
+    let user = token === "" ? "" : jwt_decode(token);
 
     const submitHandler = e => {
         e.preventDefault();
@@ -28,6 +32,12 @@ function LoginForm() {
         .catch(err => { setError(true) })
         // Login(details);
     }
+
+    useEffect( () => {
+        if (user !== "") {
+            navigate('/');
+        }
+    }, [])
 
     return (
         <div className="bg-gray-800 text-white">

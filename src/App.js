@@ -18,27 +18,19 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-            crossOrigin="anonymous"
-          />
-
           <Routes>
-            <Route path='/login' exact element={<LoginForm />} />
             <Route path="/" element={<Home />} />
+            <Route path='/login' exact element={<LoginForm />} />
             <Route path='/search/:name' element={<SearchGame />} />
             <Route path="/OneGame/:id" element={<OneGame />} />
             <Route path='/yourList/:userid' element={<Yourlist />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/EditProfile/:userid' element={<EditProfile />} />
             <Route path='/profile/:userid' element={<Profile />} />
+          
+            {/* no routes */}
+            <Route path="*" element={<div>404 No Page Found</div>} />
           </Routes>
-
-          <script src="https://unpkg.com/react/umd/react.production.min.js" crossOrigin="anonymous"></script>
-          <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossOrigin="anonymous"></script>
-          <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossOrigin="anonymous"></script>
         </BrowserRouter>
       </PersistGate>
     </Provider>

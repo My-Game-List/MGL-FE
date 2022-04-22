@@ -65,8 +65,8 @@ function Profile() {
         <div className="bg-gray-800 text-white'">
             <Navbar />
             {loading ? (
-                <div className=''>
-                    Loading...    
+                <div className='text-white'>
+                    Loading...
                 </div>
             ) : (
                 <div className='mx-4 grid gap-5 grid-cols-1 grid-rows-1 place-content-center lg:grid-cols-12 bg-gray-800 text-white'>

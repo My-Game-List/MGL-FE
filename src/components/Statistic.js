@@ -16,5 +16,4 @@ function Statistic(props) {
     )
 }
 
-
 export default Statistic;
