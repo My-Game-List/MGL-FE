@@ -18,7 +18,7 @@ function NavBar() {
     const [User, setUser] = useState('');
 
     useEffect(() => {
-        axios.post("http://localhost:5000/getUserByEmail", { email: user.email })
+        axios.post("https://mgl-be.herokuapp.com/getUserByEmail", { email: user.email })
         .then(res => {
             setUser(res.data)
         })
@@ -36,7 +36,7 @@ function NavBar() {
     }
 
     function logOutHander() {
-        axios.post('http://localhost:5000/logout')
+        axios.post('https://mgl-be.herokuapp.com/logout')
         setUser('');
         dispatch(REMOVE_USER());
     }

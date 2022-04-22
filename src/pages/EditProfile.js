@@ -19,7 +19,7 @@ function EditProfile() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.post("http://localhost:5000/getUserById", { id: userid })
+        axios.post("https://mgl-be.herokuapp.com/getUserById", { id: userid })
         .then(res => {
             // console.log(res.data);
             if (res.data.email !== userToken.email) {

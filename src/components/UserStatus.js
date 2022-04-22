@@ -12,7 +12,7 @@ function OneGame(props) {
 
     useEffect(() => {
         // console.log(props)
-        axios.post('http://localhost:5000/getUserByEmail', { email: props.user.email })
+        axios.post('https://mgl-be.herokuapp.com/getUserByEmail', { email: props.user.email })
         .then(res => {
             // console.log(res.data);
             if (res.data !== "") {
@@ -38,7 +38,7 @@ function OneGame(props) {
     function ratingChangeHandler(e) {
         setRating(e);
 
-        axios.post('http://localhost:5000/setGameRating', { email: props.user.email, value: e, id: props.id })
+        axios.post('https://mgl-be.herokuapp.com/setGameRating', { email: props.user.email, value: e, id: props.id })
     }
 
     function statusChangeHandler(e) {
@@ -52,7 +52,7 @@ function OneGame(props) {
             }
         }
         setStatus(e);
-        axios.post('http://localhost:5000/setGameStatus', { email: props.user.email, value: e, id: props.id })
+        axios.post('https://mgl-be.herokuapp.com/setGameStatus', { email: props.user.email, value: e, id: props.id })
     }
 
     return (

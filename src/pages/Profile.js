@@ -24,7 +24,7 @@ function Profile() {
 
     useEffect( () => {
         setLoading(true);
-        axios.post('http://localhost:5000/getUserById', {id : userid})
+        axios.post('https://mgl-be.herokuapp.com/getUserById', {id : userid})
         .then( res => {
             // console.log(res.data)
             if (res.data === "") {
@@ -34,7 +34,7 @@ function Profile() {
             setUser(res.data);
         })
 
-        axios.post("http://localhost:5000/getUserByEmail", { email: userToken.email })
+        axios.post("https://mgl-be.herokuapp.com/getUserByEmail", { email: userToken.email })
         .then(res => {
             setId(res.data.id);
 
@@ -43,7 +43,7 @@ function Profile() {
             })
         })
 
-        axios.post("http://localhost:5000/getGamesById", { id: userid })
+        axios.post("https://mgl-be.herokuapp.com/getGamesById", { id: userid })
         .then((res) => {
             // console.log(res.data)
             setGames(res.data);
@@ -52,12 +52,12 @@ function Profile() {
     }, [userid])
 
     function addFriend() {
-        axios.post("http://localhost:5000/addFriend", { follower: id, following: userid });
+        axios.post("https://mgl-be.herokuapp.com/addFriend", { follower: id, following: userid });
         setFriend(true);
     }
 
     function removeFriend() {
-        axios.post("http://localhost:5000/deleteFriend", { follower: id, following: userid });
+        axios.post("https://mgl-be.herokuapp.com/deleteFriend", { follower: id, following: userid });
         setFriend(false);
     }
 

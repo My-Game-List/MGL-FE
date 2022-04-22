@@ -16,7 +16,7 @@ function OneGame(props) {
     useEffect(() => {
         // console.log(id);
 
-        axios.get(`http://localhost:5000/search/game/${name}`)
+        axios.get(`https://mgl-be.herokuapp.com/search/game/${name}`)
         .then((res) => {
             // console.log(res.data);
             setIsLoading(true);

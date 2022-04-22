@@ -22,7 +22,7 @@ function OneGame() {
     let user = token === "" ? "" : jwt_decode(token);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/game/${id}`)
+        axios.get(`https://mgl-be.herokuapp.com/game/${id}`)
         .then((res) => {
             setGame(res.data);
             setIsLoading(false);

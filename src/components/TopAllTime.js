@@ -13,7 +13,7 @@ function TopConsole() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/TopAllTime')
+        axios.get('https://mgl-be.herokuapp.com/TopAllTime')
         .then(res => {
             setGame(res.data);
             setIsLoading(false);

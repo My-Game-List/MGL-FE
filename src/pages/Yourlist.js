@@ -13,7 +13,7 @@ function Yourlist() {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        axios.post("http://localhost:5000/getGamesById", { id: userid })
+        axios.post("https://mgl-be.herokuapp.com/getGamesById", { id: userid })
         .then((res) => {
             // console.log(res.data)
             if (res.data === "no user") {

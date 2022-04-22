@@ -15,9 +15,9 @@ function LoginForm() {
     const submitHandler = e => {
         e.preventDefault();
 
-        axios.post('http://localhost:5000/signup', details)
+        axios.post('https://mgl-be.herokuapp.com/signup', details)
         .then(res => {
-            axios.post('http://localhost:5000/loadUser');
+            axios.post('https://mgl-be.herokuapp.com/loadUser');
             
             navigate("/login");
         })

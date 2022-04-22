@@ -17,7 +17,7 @@ function Home() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect( () => {
-        axios.post("http://localhost:5000/getUserByEmail", { email: user.email })
+        axios.post("https://mgl-be.herokuapp.com/getUserByEmail", { email: user.email })
         .then(res => {
             setUser(res.data);
             setIsLoading(false);

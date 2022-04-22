@@ -19,10 +19,10 @@ function LoginForm() {
     const submitHandler = e => {
         e.preventDefault();
         
-        axios.post('http://localhost:5000/loadUser');
+        axios.post('https://mgl-be.herokuapp.com/loadUser');
 
         // console.log(details)
-        axios.post('http://localhost:5000/login', details)
+        axios.post('https://mgl-be.herokuapp.com/login', details)
         .then(res => {
             // console.log(res.data)
             setError(false);

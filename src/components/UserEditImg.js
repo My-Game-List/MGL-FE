@@ -54,7 +54,7 @@ function UserEditImg(props) {
         
         setLoad(true);
 
-        axios.post("http://localhost:5000/updateUser", formData)
+        axios.post("https://mgl-be.herokuapp.com/updateUser", formData)
         .then(res => {
             setLoad(false);
             alert("Upload Succeed");

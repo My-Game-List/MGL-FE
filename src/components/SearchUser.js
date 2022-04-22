@@ -11,7 +11,7 @@ function SearchUser(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/search/user/${props.name}`)
+        axios.get(`https://mgl-be.herokuapp.com/search/user/${props.name}`)
         .then(res => {
             setUser(res.data);
             setLoadUser(res.data.slice(0, 10));

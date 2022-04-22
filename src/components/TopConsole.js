@@ -12,7 +12,7 @@ function TopConsole() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/TopConsoleGames')
+        axios.get('https://mgl-be.herokuapp.com/TopConsoleGames')
         .then(res => {
             setGame(res.data);
             setIsLoading(false);

@@ -13,7 +13,7 @@ function Newest() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/newest')
+        axios.get('https://mgl-be.herokuapp.com/newest')
         .then(res => {
             setGame(res.data);
             setIsLoading(false);

@@ -16,14 +16,14 @@ function ProfileMenu(props) {
 
     useEffect(() => {
         props.user.followings.map(u => {
-            axios.post('http://localhost:5000/getUserById', { id: u })
+            axios.post('https://mgl-be.herokuapp.com/getUserById', { id: u })
             .then(res => {
                 setFollowings(followings => [...followings, res.data]);
             })
         })
 
         props.user.followers.map(u => {
-            axios.post('http://localhost:5000/getUserById', { id: u })
+            axios.post('https://mgl-be.herokuapp.com/getUserById', { id: u })
             .then(res => {
                 setFollowers(followers => [...followers, res.data]);
             })
