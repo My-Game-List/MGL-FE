@@ -26,13 +26,14 @@ function Home() {
 
     return (
         <div>
-            <NavBar />
-            isLoading ? (
+            {isLoading ? (
                 <div>
+                    <NavBar />
                     Loading...
                 </div>
             ) : (
                 <div className='bg-gray-800 text-white'>
+                    <NavBar />
                     <div className="mx-4">
                         <div className='lg:mx-28'>
                             {user.email !== undefined ? <Statistic user={User}/> : null} 
@@ -51,7 +52,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
-            )
+            )}
         </div>
     );
 }
